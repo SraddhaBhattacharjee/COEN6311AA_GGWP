@@ -1,6 +1,10 @@
 # COEN6311 Project : Team GGWP
-Authors: Dinesh Kini Bailoor, Jimi Mehta, Sraddha Bhattacharjee, Saketh Oppula, Sultan Singh
-
+## Authors: 
+Dinesh Kini Bailoor(40231799)
+<br>Jimi Mehta(40225526) 
+<br>Sraddha Bhattacharjee(40221370) 
+<br>Saketh Oppula(40221013)
+<br>Sultan Singh(40235080)
 
 ## User stories and estimates
 
@@ -22,14 +26,14 @@ Authors: Dinesh Kini Bailoor, Jimi Mehta, Sraddha Bhattacharjee, Saketh Oppula, 
 
 | User Story                                                                                                        | Task                                                                       | Estimate | Priority | Status  |
 |-------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|----------|----------|---------|
-| As a customer, I want to create a booking by selecting a travel package, so that I can secure my reservation.     | - Implement booking process for customers selecting a travel package       | 6 days   | High     | Planned |
-|                                                                                                                   | - Develop secure reservation system                                         | 4 days   | High     | Planned |
-| As a customer, I want to modify or cancel my booking if my plans change, ensuring flexibility.                   | - Design and implement booking modification functionality                  | 4 days   | Medium   | Planned |
-|                                                                                                                   | - Develop cancellation process for customers                                | 3 days   | Medium   | Planned |
-| As an agent, I want to view and manage customer bookings, including modifying or canceling them as requested.     | - Create interface to view and manage customer bookings                     | 5 days   | High     | Planned |
-|                                                                                                                   | - Implement modification and cancellation functionality                    | 4 days   | High     | Planned |
-| As an agent, I want to generate booking reports to track the number of bookings, revenue, and other metrics.      | - Design and implement booking report generation                           | 5 days   | Medium   | Planned |
-|                                                                                                                   | - Include tracking of bookings, revenue, and other metrics                  | 3 days   | Medium   | Planned |
+| As a customer, I want to create a booking by selecting a travel package, so that I can secure my reservation.     | - Implement booking process for customers selecting a travel package       | 6 days   | High     | Sprint 1 |
+|                                                                                                                   | - Develop secure reservation system                                         | 4 days   | High     | Sprint 1 |
+| As a customer, I want to modify or cancel my booking if my plans change, ensuring flexibility.                   | - Design and implement booking modification functionality                  | 4 days   | Medium   | Sprint 1 |
+|                                                                                                                   | - Develop cancellation process for customers                                | 3 days   | Medium   | Sprint 1 |
+| As an agent, I want to view and manage customer bookings, including modifying or canceling them as requested.     | - Create interface to view and manage customer bookings                     | 5 days   | High     | Sprint 1 |
+|                                                                                                                   | - Implement modification and cancellation functionality                    | 4 days   | High     | Sprint 1 |
+| As an agent, I want to generate booking reports to track the number of bookings, revenue, and other metrics.      | - Design and implement booking report generation                           | 5 days   | Medium   | Sprint 1 |
+|                                                                                                                   | - Include tracking of bookings, revenue, and other metrics                  | 3 days   | Medium   | Sprint 1 |
 
 
 
