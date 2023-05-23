@@ -2,7 +2,11 @@ package com.travelsystem.model;
 
 import java.util.Date;
 
+import com.travelsystem.constant.UserType;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,6 +20,10 @@ public class User {
 	private String lastName;
 	private Date dateOfBirth;
 	private String email;
+	private String password;
+
+	@Enumerated(EnumType.STRING)
+	private UserType type;
 
 	public Long getId() {
 		return id;
@@ -55,6 +63,22 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public UserType getType() {
+		return type;
+	}
+
+	public void setType(UserType type) {
+		this.type = type;
 	}
 
 }

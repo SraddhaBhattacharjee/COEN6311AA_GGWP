@@ -36,4 +36,11 @@ public class UserController {
 		return ResponseEntity.ok(users);
 	}
 
+	@CrossOrigin
+	@PostMapping("/login")
+	public ResponseEntity<User> getUser(@RequestBody User user) {
+		User found = userService.getUser(user);
+		return ResponseEntity.ok(found);
+	}
+
 }
