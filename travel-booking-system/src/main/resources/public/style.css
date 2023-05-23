@@ -1,0 +1,178 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Lato", arial, sans-serif;
+}
+
+li {
+  cursor: pointer;
+}
+.nav-element {
+  margin-top: 20px;
+}
+
+#container {
+  justify-content: center;
+ 
+}
+
+.card-img-top {
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-title {
+  font-size: 25px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.row {
+    margin-top: 20px;
+
+}
+
+.card {
+    margin: 10px;
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+.cc {
+    height: 470px;
+    width: 400px;
+}
+
+.cu {
+    height: 350px;
+}
+.au {
+    height: 350px;
+}
+.form-control {
+    margin-bottom: 5px;
+}
+b {
+    margin-bottom: 3px;
+}
+
+.btn-block {
+    margin-top: 10px;
+}
+
+#createPackage {
+    display: none;
+    position: absolute;
+    top: 150px;
+    left: 550px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    z-index: 10;
+
+}
+
+#createUser {
+    display: none;
+    position: absolute;
+    top: 150px;
+    left: 550px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    z-index: 10;
+
+}
+
+#selectUser {
+   width: 230px;
+   height: 30px;
+}
+
+#selectUserForBooking {
+  width: 230px;
+   height: 30px;
+}
+
+#selectUserFromDrop {
+    width: 100px;
+    height: 38px;
+    margin-left: 5px;
+    margin-top: 14px;
+    border-color: green;
+    border-radius: 5px;
+    text-align: center;
+    color: green;
+    font-size: 1rem;
+}
+
+#assignUser {
+  display: none;
+  position: absolute;
+  top: 150px;
+  left: 550px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  z-index: 10;
+
+}
+#edit {
+    padding-left: 5px;
+}
+
+#delete {
+    padding-left: 5px;
+}
+
+#report{
+  margin-left: 5px;
+}
+
+#booking {
+  margin-left: 5px;
+}
+
+#packageName {
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.cd {
+    height: 200px;
+    border: 2px solid black;
+}
+
+i {
+    margin-right: 5px;
+    margin-left: 3px;
+}
+
+
+#editPackage {
+  display: none;
+  position: absolute;
+  top: 150px;
+  left: 550px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  height: 290px;
+}
+
+#bookingName {
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.ca {
+  height: 200px;
+  border: 2px solid black;
+}
+
+
