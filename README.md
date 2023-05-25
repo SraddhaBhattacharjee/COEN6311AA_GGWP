@@ -1,5 +1,10 @@
 # COEN6311 Project : Team GGWP
 ## Authors: 
+Dinesh Kini Bailoor(40231799)
+<br>Jimi Mehta(40225526) 
+<br>Sraddha Bhattacharjee(40221370) 
+<br>Saketh Oppula(40221013)
+<br> Sultan Singh(40235080)
 
 ## User stories and estimates
 
