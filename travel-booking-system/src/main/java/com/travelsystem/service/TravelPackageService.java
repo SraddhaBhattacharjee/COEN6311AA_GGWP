@@ -86,4 +86,41 @@ public class TravelPackageService {
 		return findById.get();
 	}
 
+	public List<TravelPackage> filterTravelPackage(TravelPackage travelPackage) {
+		String destinationCity = travelPackage.getDestinationCity();
+		String destinationCountry = travelPackage.getDestinationCountry();
+		Long numberOfDays = travelPackage.getNumberOfDays();
+		Long numberOfNights = travelPackage.getNumberOfNights();
+		Double price = travelPackage.getPrice();
+		if (destinationCity != null && destinationCity.length() > 0 && destinationCountry != null
+				&& destinationCountry.length() > 0 && numberOfDays != null && numberOfNights != null && price != null) {
+			return travelPackageRepository.getTravelPackageByAll(destinationCity, destinationCountry, numberOfDays,
+					numberOfNights, price);
+		}
+
+		if (destinationCity != null && destinationCity.length() > 0 && destinationCountry.length() == 0
+				&& numberOfDays == null && numberOfNights == null && price == null) {
+			return travelPackageRepository.getTravelPackageByCity(destinationCity);
+		}
+		if (destinationCity.length() == 0 && destinationCountry.length() > 0 && numberOfDays == null
+				&& numberOfNights == null && price == null) {
+			return travelPackageRepository.getTravelPackageByCountry(destinationCountry);
+		}
+
+		if (destinationCity.length() == 0 && destinationCountry.length() == 0 && numberOfDays != null
+				&& numberOfDays > 0 && numberOfNights == null && price == null) {
+			return travelPackageRepository.getTravelPackageByDays(numberOfDays);
+		}
+		if (destinationCity.length() == 0 && destinationCountry.length() == 0 && numberOfDays == null
+				&& numberOfNights != null && numberOfNights > 0 && price == null) {
+			return travelPackageRepository.getTravelPackageByNights(numberOfNights);
+		}
+		if (destinationCity.length() == 0 && destinationCountry.length() == 0 && numberOfDays == null
+				&& numberOfNights == null && price != null && price > 0) {
+			return travelPackageRepository.getTravelPackageByPrice(price);
+		}
+
+		return null;
+	}
+
 }

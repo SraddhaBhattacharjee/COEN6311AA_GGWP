@@ -32,6 +32,13 @@ public class TravelPackageController {
 		TravelPackage createdPackage = travelPackageService.createTravelPackage(travelPackage);
 		return ResponseEntity.status(HttpStatus.CREATED).body(createdPackage);
 	}
+	
+	@CrossOrigin
+	@PostMapping("/filter")
+	public ResponseEntity<List<TravelPackage>> filterTravelPackage(@RequestBody TravelPackage travelPackage) {
+		List<TravelPackage> createdPackages = travelPackageService.filterTravelPackage(travelPackage);
+		return ResponseEntity.ok(createdPackages);
+	}
 
 	@CrossOrigin
 	@GetMapping("/{packageId}")

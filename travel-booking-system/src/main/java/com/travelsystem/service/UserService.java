@@ -24,4 +24,8 @@ public class UserService {
 	public User getUser(User user) {
 		return userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());
 	}
+
+	public User getAllUser(Long userId) {
+		return userRepository.findById(userId).get();
+	}
 }
