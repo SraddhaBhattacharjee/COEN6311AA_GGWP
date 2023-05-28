@@ -4,7 +4,7 @@ Dinesh Kini Bailoor(40231799)
 <br>Jimi Mehta(40225526) 
 <br>Sraddha Bhattacharjee(40221370) 
 <br>Saketh Oppula(40221013)
-<br>Sultan Singh(40235080)
+<br> Sultan Singh(40235080)
 
 ## User stories and estimates
 
@@ -78,14 +78,14 @@ Dinesh Kini Bailoor(40231799)
 #### Epic 6: User Account Management
 
 | User Story                                                                                                                              | Task                                                                              | Estimate | Priority | Status  |
-|-----------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|----------|----------|---------|
-| As a customer, I want to create a user account to access personalized features and manage my bookings.                                | - Design and implement user account creation functionality                         | 3 days   | High     | Planned |
-|                                                                                                                                         | - Develop secure user account registration process                                | 2 days   | High     | Planned |
-| As a customer, I want to view and modify my account information, such as contact details or preferences.                              | - Design user interface for viewing and modifying account information              | 3 days   | Medium   | Planned |
-|                                                                                                                                         | - Implement functionality to update account information                            | 2 days   | Medium   | Planned |
-| As an agent, I want to manage agent accounts, including granting or revoking access privileges.                                       | - Design interface for managing agent accounts                                     | 3 days   | High     | Planned |
-|                                                                                                                                         | - Implement functionality to grant or revoke access privileges for agent accounts | 2 days   | High     | Planned |
-| As an agent, I want to implement security measures (e.g., password hashing, authentication) to protect user accounts from unauthorized access. | - Implement password hashing and storage mechanism                               | 3 days   | High     | Planned |
-|                                                                                                                                         | - Develop authentication system for user account login                            | 4 days   | High     | Planned |
+|-----------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|--------|----------|---------|
+| As a customer, I want to create a user account to access personalized features and manage my bookings.                                | - Design and implement user account creation functionality                         | 3 days | High     | Planned |
+|                                                                                                                                         | - Develop secure user account registration process                                | 2 days | High     | Planned |
+| As a customer, I want to view and modify my account information, such as contact details or preferences.                              | - Design user interface for viewing and modifying account information              | 3 days | Medium   | Planned |
+|                                                                                                                                         | - Implement functionality to update account information                            | 2 days | Medium   | Planned |
+| As an agent, I want to manage agent accounts, including granting or revoking access privileges.                                       | - Design interface for managing agent accounts                                     | 3 days | High     | Planned |
+|                                                                                                                                         | - Implement functionality to grant or revoke access privileges for agent accounts | 2 days | High     | Planned |
+| As an agent, I want to implement security measures (e.g., password hashing, authentication) to protect user accounts from unauthorized access. | - Implement password hashing and storage mechanism                               | 3 days | High     | Planned |
+|                                                                                                                                         | - Develop authentication system for user account login                            | 4 days | High     | Planned |
 
 
