@@ -22,7 +22,7 @@ Dinesh Kini Bailoor(40231799)
 |                                                                                                                   | Develop sorting mechanism for search results                                | 2 days   | Medium   |  Completed     |
 | As an agent, I want to create new travel packages, specifying the included flights, hotels, and activities        | Design agent interface for creating new travel packages                     | 4 days   | High     |  Completed    |
 |                                                                                                                   | Implement functionality to save and store created packages                  | 3 days   | High     | Completed     |
-| As an agent, I want to modify existing travel packages, such as updating the prices, adding, or removing components, or changing package details | Develop interface for modifying existing travel packages             | 5 days   | Medium   |  Done        |
+| As an agent, I want to modify existing travel packages, such as updating the prices, adding, or removing components, or changing package details | Develop interface for modifying existing travel packages             | 5 days   | Medium   |  Completed      |
 |                                                                                                                   | Implement version control or history tracking for changes                    | 3 days   | Medium   |  Completed    |
 
 
@@ -31,11 +31,11 @@ Dinesh Kini Bailoor(40231799)
 | User Story                                                                                                        | Task                                                                       | Estimate | Priority | Status  |
 |-------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|----------|----------|---------|
 | As a customer, I want to create a booking by selecting a travel package, so that I can secure my reservation.     | - Implement booking process for customers selecting a travel package       | 6 days   | High     |  Completed  |
-|                                                                                                                   | - Develop secure reservation system                                         | 4 days   | High     | Sprint 1 |
+|                                                                                                                   | - Develop secure reservation system                                         | 4 days   | High     | Completed |
 | As a customer, I want to modify or cancel my booking if my plans change, ensuring flexibility.                   | - Design and implement booking modification functionality                  | 4 days   | Medium   |  Completed  |
-|                                                                                                                   | - Develop cancellation process for customers                                | 3 days   | Medium   | Sprint 1 |
+|                                                                                                                   | - Develop cancellation process for customers                                | 3 days   | Medium   | Completed   |
 | As an agent, I want to view and manage customer bookings, including modifying or canceling them as requested.     | - Create interface to view and manage customer bookings                     | 5 days   | High     |  Completed |
-|                                                                                                                   | - Implement modification and cancellation functionality                    | 4 days   | High     | Sprint 1 |
+|                                                                                                                   | - Implement modification and cancellation functionality                    | 4 days   | High     | Completed |
 | As an agent, I want to generate booking reports to track the number of bookings, revenue, and other metrics.      | - Design and implement booking report generation                           | 5 days   | Medium   |  Completed  |
 |                                                                                                                   | - Include tracking of bookings, revenue, and other metrics                  | 3 days   | Medium   |  Completed   |
 
