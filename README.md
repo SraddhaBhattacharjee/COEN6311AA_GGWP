@@ -6,6 +6,10 @@ Dinesh Kini Bailoor(40231799)
 <br>Saketh Oppula(40221013)
 <br> Sultan Singh(40235080)
 
+## Website: https://travel-package-management.herokuapp.com/
+### Agent Login: aliceagent@gmail.com/ alice123
+### Customer Login: customer@gmail.com/ customer123
+
 ## User stories and estimates
 
 
