@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking History</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <form class="container-fluid justify-content-start">
+        <button
+          class="btn btn-outline-success me-2 mr-2"
+          type="button"
+          id="addUser"
+        >
+          Add User
+        </button>
+        <button
+          class="btn btn-outline-success me-2"
+          type="button"
+          id="seePackage"
+        >
+          See Travel Package
+        </button>
+        <button class="btn btn-outline-success me-2" type="button" id="report">
+          Travel Report
+        </button>
+        <select
+          class="form-select form-select-lg mb-3"
+          aria-label=".form-select-lg example"
+          id="selectUserFromDrop"
+        ></select>
+      </form>
+    </nav>
+
+    <div class="container">
+      <div class="row" id="container"></div>
+    </div>
+
+    <div id="createPackage" class="card cc" style="width: 17rem">
+      <div class="card-img-top" style="background-color: rgb(217, 255, 230)">
+        <p class="card-title" id="tt">Add New Package</p>
+      </div>
+      <div class="card-body">
+        <input
+          id="p1"
+          class="form-control"
+          type="text"
+          placeholder="Package Name"
+          aria-label="default input example"
+        />
+        <input
+          id="p2"
+          class="form-control"
+          type="text"
+          placeholder="Hotel Name"
+          aria-label="default input example"
+        />
+        <input
+          id="p3"
+          class="form-control"
+          type="text"
+          placeholder="Number of Days"
+          aria-label="default input example"
+        />
+        <input
+          id="p4"
+          class="form-control"
+          type="text"
+          placeholder="Number of Night"
+          aria-label="default input example"
+        />
+        <input
+          id="p5"
+          class="form-control"
+          type="text"
+          placeholder="Destination City"
+          aria-label="default input example"
+        />
+        <input
+          id="p6"
+          class="form-control"
+          type="text"
+          placeholder="Destination Country"
+          aria-label="default input example"
+        />
+        <input
+          id="p7"
+          class="form-control"
+          type="text"
+          placeholder="Price"
+          aria-label="default input example"
+        />
+
+        <button id="newPackage" class="btn btn-primary btn-block">
+          Add Package
+        </button>
+      </div>
+    </div>
+
+    <div id="createUser" class="card cu" style="width: 17rem">
+      <div class="card-img-top" style="background-color: rgb(217, 255, 230)">
+        <p class="card-title">Add User</p>
+      </div>
+      <div class="card-body">
+        <input
+          id="u1"
+          class="form-control"
+          type="text"
+          placeholder="first Name"
+          aria-label="default input example"
+        />
+        <input
+          id="u2"
+          class="form-control"
+          type="text"
+          placeholder="Last Name"
+          aria-label="default input example"
+        />
+        <input
+          id="u3"
+          class="form-control"
+          type="date"
+          placeholder="DOB"
+          aria-label="default input example"
+        />
+        <input
+          id="u4"
+          class="form-control"
+          type="email"
+          placeholder="Email ID"
+          aria-label="default input example"
+        />
+
+        <button id="newUser" class="btn btn-primary btn-block">Add User</button>
+      </div>
+    </div>
+
+    <div id="assignUser" class="card au" style="width: 17rem">
+      <div class="card-img-top" style="background-color: rgb(217, 255, 230)">
+        <p class="card-title">Booking Now</p>
+      </div>
+      <div class="card-body">
+        <div id="packageName"></div>
+        <select
+          class="form-select form-select-lg mb-3"
+          aria-label=".form-select-lg example"
+          id="selectUser"
+        ></select>
+
+        <input
+          id="a3"
+          class="form-control"
+          type="date"
+          placeholder="Departure Date"
+          aria-label="default input example"
+        />
+
+        <button id="assignUserNow" class="btn btn-primary btn-block">
+          Save
+        </button>
+      </div>
+    </div>
+
+    <div id="editPackage" class="card au" style="width: 17rem">
+        <div class="card-img-top" style="background-color: rgb(217, 255, 230)">
+          <p class="card-title">Edit Booking</p>
+        </div>
+        <div class="card-body">
+          <div id="bookingName"></div>
+              <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" id="selectUserForBooking">
+          </select>
+  
+          <input
+            id="bb3"
+            class="form-control"
+            type="date"
+            placeholder="Departure Date"
+            aria-label="default input example"
+          />
+  
+          <button id="saveEditBooking" class="btn btn-primary btn-block">Save</button>
+        </div>
+      </div>
+
+    <script src="bookingScript.js"></script>
+  </body>
+</html>
