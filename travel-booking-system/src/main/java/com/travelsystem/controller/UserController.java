@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +29,13 @@ public class UserController {
 	public ResponseEntity<User> createUser(@RequestBody User user) {
 		User createdUser = userService.createUser(user);
 		return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+	}
+
+	@CrossOrigin
+	@PutMapping
+	public ResponseEntity<User> updateUser(@RequestBody User user) {
+		User updatedUser = userService.updateUser(user);
+		return ResponseEntity.ok(updatedUser);
 	}
 
 	@CrossOrigin

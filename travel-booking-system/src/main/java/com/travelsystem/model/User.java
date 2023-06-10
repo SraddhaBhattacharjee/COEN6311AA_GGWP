@@ -2,14 +2,16 @@ package com.travelsystem.model;
 
 import java.util.Date;
 
-import com.travelsystem.constant.UserType;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.travelsystem.constant.UserType;
 
 @Entity
 public class User {
@@ -24,6 +26,10 @@ public class User {
 
 	@Enumerated(EnumType.STRING)
 	private UserType type;
+
+	@OneToOne(mappedBy = "user")
+	@JsonIgnore
+	private TravelPackage travelPackage;
 
 	public Long getId() {
 		return id;
@@ -79,6 +85,14 @@ public class User {
 
 	public void setType(UserType type) {
 		this.type = type;
+	}
+
+	public TravelPackage getTravelPackage() {
+		return travelPackage;
+	}
+
+	public void setTravelPackage(TravelPackage travelPackage) {
+		this.travelPackage = travelPackage;
 	}
 
 }

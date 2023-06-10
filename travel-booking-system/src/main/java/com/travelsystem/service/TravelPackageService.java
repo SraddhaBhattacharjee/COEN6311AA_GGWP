@@ -1,6 +1,7 @@
 package com.travelsystem.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -10,34 +11,59 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.travelsystem.model.Booking;
+import com.travelsystem.model.Flight;
 import com.travelsystem.model.TravelPackage;
+import com.travelsystem.model.User;
 import com.travelsystem.repository.BookingRepository;
+import com.travelsystem.repository.FlightRepository;
 import com.travelsystem.repository.TravelPackageRepository;
+import com.travelsystem.repository.UserRepository;
+import com.travelsystem.ro.TravelPackageRO;
 import com.travelsystem.ro.TravelPackageReport;
 
 @Service
 public class TravelPackageService {
 	@Autowired
 	private TravelPackageRepository travelPackageRepository;
+	@Autowired
+	private FlightRepository flightRepository;
 
 	@Autowired
 	private BookingRepository bookingRepository;
 
-	public TravelPackage createTravelPackage(TravelPackage travelPackage) {
-		return travelPackageRepository.save(travelPackage);
+	@Autowired
+	private UserRepository userRepository;
+
+	public TravelPackage createTravelPackage(TravelPackageRO travelPackage) {
+		TravelPackage entity = new TravelPackage();
+		if (travelPackage.getFlightId() != null) {
+			Flight flight = flightRepository.findById(travelPackage.getFlightId()).get();
+			entity.setFlight(flight);
+		}
+
+		if (travelPackage.getUserId() != null) {
+			User user = userRepository.findById(travelPackage.getUserId()).get();
+			entity.setUser(user);
+		}
+		entity.setDestinationCity(travelPackage.getDestinationCity());
+		entity.setDestinationCountry(travelPackage.getDestinationCountry());
+		entity.setHotelName(travelPackage.getHotelName());
+		entity.setName(travelPackage.getName());
+		entity.setNumberOfDays(travelPackage.getNumberOfDays());
+		entity.setNumberOfNights(travelPackage.getNumberOfNights());
+		entity.setPrice(travelPackage.getPrice());
+
+		return travelPackageRepository.save(entity);
 	}
 
-	public TravelPackage updateTravelPackage(TravelPackage travelPackage) {
+	public TravelPackage updateTravelPackage(TravelPackageRO travelPackage) {
 		Optional<TravelPackage> findById = travelPackageRepository.findById(travelPackage.getId());
-		if (findById.isEmpty()) {
-			return null;
-		}
 		TravelPackage existingTravelPackage = findById.get();
 		setAttribute(existingTravelPackage, travelPackage);
 		return travelPackageRepository.save(existingTravelPackage);
 	}
 
-	private void setAttribute(TravelPackage existingTravelPackage, TravelPackage travelPackage) {
+	private void setAttribute(TravelPackage existingTravelPackage, TravelPackageRO travelPackage) {
 		existingTravelPackage.setDestinationCity(travelPackage.getDestinationCity());
 		existingTravelPackage.setDestinationCountry(travelPackage.getDestinationCountry());
 		existingTravelPackage.setHotelName(travelPackage.getHotelName());
@@ -45,6 +71,14 @@ public class TravelPackageService {
 		existingTravelPackage.setNumberOfDays(travelPackage.getNumberOfDays());
 		existingTravelPackage.setNumberOfNights(travelPackage.getNumberOfNights());
 		existingTravelPackage.setPrice(travelPackage.getPrice());
+		if (travelPackage.getFlightId() != null) {
+			Flight flight = flightRepository.findById(travelPackage.getFlightId()).get();
+			existingTravelPackage.setFlight(flight);
+		}
+		if (travelPackage.getUserId() != null) {
+			User user = userRepository.findById(travelPackage.getUserId()).get();
+			existingTravelPackage.setUser(user);
+		}
 	}
 
 	public List<TravelPackage> getAllTravelPackages() {
@@ -55,6 +89,9 @@ public class TravelPackageService {
 		List<TravelPackage> travelPackages = travelPackageRepository.findAll();
 		List<TravelPackageReport> reports = new ArrayList<>(travelPackages.size());
 		List<Booking> bookings = bookingRepository.findAll();
+		if (bookings == null) {
+			return Arrays.asList();
+		}
 		Map<Long, List<Booking>> collect = bookings.stream()
 				.collect(Collectors.groupingBy(book -> book.getTravelPackage().getId()));
 		for (TravelPackage travelPackage : travelPackages) {
@@ -92,35 +129,14 @@ public class TravelPackageService {
 		Long numberOfDays = travelPackage.getNumberOfDays();
 		Long numberOfNights = travelPackage.getNumberOfNights();
 		Double price = travelPackage.getPrice();
-		if (destinationCity != null && destinationCity.length() > 0 && destinationCountry != null
-				&& destinationCountry.length() > 0 && numberOfDays != null && numberOfNights != null && price != null) {
-			return travelPackageRepository.getTravelPackageByAll(destinationCity, destinationCountry, numberOfDays,
-					numberOfNights, price);
-		}
+		return travelPackageRepository.filterTravelPackage(destinationCity, destinationCountry, numberOfDays,
+				numberOfNights, price);
+	}
 
-		if (destinationCity != null && destinationCity.length() > 0 && destinationCountry.length() == 0
-				&& numberOfDays == null && numberOfNights == null && price == null) {
-			return travelPackageRepository.getTravelPackageByCity(destinationCity);
-		}
-		if (destinationCity.length() == 0 && destinationCountry.length() > 0 && numberOfDays == null
-				&& numberOfNights == null && price == null) {
-			return travelPackageRepository.getTravelPackageByCountry(destinationCountry);
-		}
-
-		if (destinationCity.length() == 0 && destinationCountry.length() == 0 && numberOfDays != null
-				&& numberOfDays > 0 && numberOfNights == null && price == null) {
-			return travelPackageRepository.getTravelPackageByDays(numberOfDays);
-		}
-		if (destinationCity.length() == 0 && destinationCountry.length() == 0 && numberOfDays == null
-				&& numberOfNights != null && numberOfNights > 0 && price == null) {
-			return travelPackageRepository.getTravelPackageByNights(numberOfNights);
-		}
-		if (destinationCity.length() == 0 && destinationCountry.length() == 0 && numberOfDays == null
-				&& numberOfNights == null && price != null && price > 0) {
-			return travelPackageRepository.getTravelPackageByPrice(price);
-		}
-
-		return null;
+	public List<TravelPackage> getAllTravelPackageByUSerId(Long userId) {
+		List<TravelPackage> findAll = travelPackageRepository.findAll();
+		return findAll.stream().filter(travel -> travel.getUser() != null && travel.getUser().getId() == userId)
+				.collect(Collectors.toList());
 	}
 
 }

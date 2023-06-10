@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.travelsystem.model.TravelPackage;
+import com.travelsystem.ro.TravelPackageRO;
 import com.travelsystem.ro.TravelPackageReport;
 import com.travelsystem.service.TravelPackageService;
 
@@ -28,11 +29,11 @@ public class TravelPackageController {
 
 	@CrossOrigin
 	@PostMapping
-	public ResponseEntity<TravelPackage> createTravelPackage(@RequestBody TravelPackage travelPackage) {
+	public ResponseEntity<TravelPackage> createTravelPackage(@RequestBody TravelPackageRO travelPackage) {
 		TravelPackage createdPackage = travelPackageService.createTravelPackage(travelPackage);
 		return ResponseEntity.status(HttpStatus.CREATED).body(createdPackage);
 	}
-	
+
 	@CrossOrigin
 	@PostMapping("/filter")
 	public ResponseEntity<List<TravelPackage>> filterTravelPackage(@RequestBody TravelPackage travelPackage) {
@@ -46,17 +47,30 @@ public class TravelPackageController {
 		TravelPackage travelPackage = travelPackageService.getAllTravelPackage(packageId);
 		return ResponseEntity.ok(travelPackage);
 	}
+	
 
 	@CrossOrigin
-	@GetMapping
-	public ResponseEntity<List<TravelPackage>> getAllTravelPackages() {
-		List<TravelPackage> travelPackages = travelPackageService.getAllTravelPackages();
+	@GetMapping("/user/{userId}")
+	public ResponseEntity<List<TravelPackage>> getAllTravelPackageByUSerId(@PathVariable Long userId) {
+		List<TravelPackage> travelPackages = travelPackageService.getAllTravelPackageByUSerId(userId);
 		return ResponseEntity.ok(travelPackages);
 	}
 
 	@CrossOrigin
+	@GetMapping
+	public ResponseEntity<List<TravelPackage>> getAllTravelPackages() {
+		try {
+			List<TravelPackage> travelPackages = travelPackageService.getAllTravelPackages();
+			return ResponseEntity.ok(travelPackages);
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+	}
+
+	@CrossOrigin
 	@PutMapping
-	public ResponseEntity<TravelPackage> updateTravelPackage(@RequestBody TravelPackage travelPackage) {
+	public ResponseEntity<TravelPackage> updateTravelPackage(@RequestBody TravelPackageRO travelPackage) {
 		TravelPackage updatedPackage = travelPackageService.updateTravelPackage(travelPackage);
 		return ResponseEntity.ok(updatedPackage);
 	}

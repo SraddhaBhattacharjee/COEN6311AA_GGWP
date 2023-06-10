@@ -1,17 +1,6 @@
-package com.travelsystem.model;
+package com.travelsystem.ro;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-
-@Entity
-public class TravelPackage {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class TravelPackageRO {
 	private Long id;
 	private String destinationCity;
 	private String destinationCountry;
@@ -20,14 +9,8 @@ public class TravelPackage {
 	private String hotelName;
 	private Double price;
 	private String name;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "flight_id", referencedColumnName = "id")
-	private Flight flight;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
-	private User user;
+	private Long flightId;
+	private Long userId;
 
 	public Long getId() {
 		return id;
@@ -89,24 +72,24 @@ public class TravelPackage {
 		return name;
 	}
 
-	public Flight getFlight() {
-		return flight;
-	}
-
-	public void setFlight(Flight flight) {
-		this.flight = flight;
-	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public User getUser() {
-		return user;
+	public Long getFlightId() {
+		return flightId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setFlightId(Long flightId) {
+		this.flightId = flightId;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 }
