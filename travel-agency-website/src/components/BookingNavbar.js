@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Dropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
+import { FaUserAlt } from 'react-icons/fa'
+import UserModal from './UserModal';
 
-function UserDropDown({ users, selectedValue, setSelectedValue, setBookings }) {
+function UserDropDown({ users, selectedValue, setSelectedValue, setBookings}) {
 
 
     const handleDropdownChange = (eventKey, event) => {
         setSelectedValue(eventKey);
         const user = users.find(user => user.firstName + " " + user.lastName === eventKey);
         if (user && user.id) {
-            fetch(`https://travel-package-management.herokuapp.com/bookings/${user.id}`)
+            fetch(`http://localhost:8080/bookings/${user.id}`)
                 .then(res => res.json())
                 .then(data => {
                     setBookings(data)
@@ -35,14 +37,14 @@ function UserDropDown({ users, selectedValue, setSelectedValue, setBookings }) {
     );
 }
 
-const BookingNavbar = ({ user, users, bookings, setBookings }) => {
+const BookingNavbar = ({ user, users, bookings, setBookings, setAllUsers }) => {
     const loginUser = user && user.length > 0 ? user[0] : null;
-    const [selectedValue, setSelectedValue] = useState(users && users.lrngth > 0 ? users[0].firstName + " " + users[0].lastName : "Select User");
- 
+    const [selectedValue, setSelectedValue] = useState(users && users.length > 0 ? users[0].firstName + " " + users[0].lastName : "Select User");
+    const [showUserModal, setShowUserModal] = React.useState(false);
 
     useEffect(() => {
         if (loginUser && loginUser.id && loginUser.type !== "AGENT") {
-            fetch(`https://travel-package-management.herokuapp.com/bookings/${loginUser.id}`)
+            fetch(`http://localhost:8080/bookings/${loginUser.id}`)
                 .then(res => res.json())
                 .then(data => {
                     setBookings(data)
@@ -53,10 +55,10 @@ const BookingNavbar = ({ user, users, bookings, setBookings }) => {
 
 
     return (<>
-
+        <UserModal show={showUserModal} onHide={() => setShowUserModal(false)} user={loginUser} setAllUsers={setAllUsers}/>
         <header className='header'>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <h2 style={{ color: 'white' }}>Hi! {user && user.length > 0 && user[0].firstName}</h2>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: "pointer" }} >
+                <h2 style={{ color: 'white' }} onClick={() => setShowUserModal(true)}><FaUserAlt style={{ marginRight: "4px", fontSize: "24px" }} />Hi! {user && user.length > 0 && user[0].firstName}</h2>
                 {loginUser && loginUser.type === "AGENT" && (<UserDropDown users={users} selectedValue={selectedValue} setSelectedValue={setSelectedValue} setBookings={setBookings} />)}
             </div>
 

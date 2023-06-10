@@ -1,7 +1,7 @@
 import React from 'react'
 import TravelBooking from './TravelBooking'
 
-const TravelBookings = ({ bookings, setBookings }) => {
+const TravelBookings = ({ bookings, setBookings, setShowNotification, setMessage, setDescription }) => {
     const lightColors = [
         "#FFD9D9",
         "#FFD9FF",
@@ -20,7 +20,7 @@ const TravelBookings = ({ bookings, setBookings }) => {
                 {bookings.length === 0 && <h1>No Bookings</h1>}
                 {bookings.map((booking) => {
                     return (
-                        <TravelBooking key={booking.id} booking={booking} color={lightColors[Math.floor(Math.random() * lightColors.length)]} setBookings={setBookings}/>
+                        <TravelBooking key={booking.id} booking={booking} color={lightColors[Math.floor(Math.random() * lightColors.length)]} setBookings={setBookings} setShowNotification={setShowNotification} setMessage={setMessage} setDescription={setDescription}/>
                     )
                 })}
             </div>

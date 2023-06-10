@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import { useLocation } from 'react-router-dom';
 import TravelPackages from './TravelPackages';
+import Notification from './Notification';
 
 
 const Home = () => {
@@ -10,15 +11,18 @@ const Home = () => {
   const splits = location.pathname.split('/');
   const userId = splits[splits.length - 1];
   const [user, setUser] = React.useState(location.state || {});
+  const [showNotification, setShowNotification] = React.useState(false);
+  const [message, setMessage] = React.useState('');
+  const [description, setDescription] = React.useState('');
 
 
   useEffect(() => {
-    fetch('https://travel-package-management.herokuapp.com/packages')
+    fetch('http://localhost:8080/packages')
       .then(res => res.json())
       .then(data => setTravelPackages(data))
       .catch(err => console.log(err))
     if (!user.hasOwnProperty("id")) {
-      fetch(`https://travel-package-management.herokuapp.com/users/${userId}`)
+      fetch(`http://localhost:8080/users/${userId}`)
         .then(res => res.json())
         .then(data => setUser(data))
         .catch(err => console.log(err))
@@ -31,12 +35,15 @@ const Home = () => {
   }
 
   const deleteTravelPackage = (id) => {
-    fetch(`https://travel-package-management.herokuapp.com/packages/${id}`, {
+    fetch(`http://localhost:8080/packages/${id}`, {
       method: 'DELETE'
     })
       .then(data => {
         const updatedTravelPackages = travelPackages.filter((travel) => travel.id !== id)
         setTravelPackages(updatedTravelPackages);
+        setShowNotification(true);
+        setMessage('Travel Package Deleted');
+        setDescription('Travel Package Deleted Successfully');
       })
       .catch(err => console.log(err))
 
@@ -61,8 +68,9 @@ const Home = () => {
 
   return (
     <div>
-      <Navbar user={user} addTravelPackage={addTravelPackage} filterTravelPackage={filterTravelPackage}/>
-      <TravelPackages user={user} travelPackages={travelPackages} updateTravelPackage={updateTravelPackage} deleteTravelPackage={deleteTravelPackage} />
+      <Navbar user={user} addTravelPackage={addTravelPackage} filterTravelPackage={filterTravelPackage} setUser={setUser} setShowNotification={setShowNotification} setMessage={setMessage} setDescription={setDescription}/>
+      {showNotification && <Notification show={showNotification}  message={message} description={description} showNotification={showNotification} setShowNotification={setShowNotification}/>}
+      <TravelPackages user={user} travelPackages={travelPackages} updateTravelPackage={updateTravelPackage} deleteTravelPackage={deleteTravelPackage} setShowNotification={setShowNotification} setMessage={setMessage} setDescription={setDescription} />
     </div>
   )
 }

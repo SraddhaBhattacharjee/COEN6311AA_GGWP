@@ -40,7 +40,7 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     if(password === password2) {
-    fetch('https://travel-package-management.herokuapp.com/users', {
+    fetch('http://localhost:8080/users', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'

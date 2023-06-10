@@ -42,7 +42,7 @@ function BookNowPackageEdit(props) {
             packageId : booking.travelPackage.id,
             id : booking.id
         }
-        fetch('https://travel-package-management.herokuapp.com/bookings', {
+        fetch('http://localhost:8080/bookings', {
             method: 'PUT',
             headers: {
                 'Content-type': 'application/json'
@@ -52,6 +52,9 @@ function BookNowPackageEdit(props) {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
+                props.setShowNotification(true)
+                props.setMessage("Package edited Successfully");
+                props.setDescription("Enjoy! Your Package has been edited successfully. ")
                 setBookings(prev => {
                     const index = prev.findIndex(booking => booking.id === data.id);
                     prev[index] = data;
@@ -63,7 +66,7 @@ function BookNowPackageEdit(props) {
 
 
     useEffect(() => {
-        fetch('https://travel-package-management.herokuapp.com/users')
+        fetch('http://localhost:8080/users')
             .then(res => res.json())
             .then(data => setUsers(data), () => {
                 setSelectedValue(users[0].firstName + " " + users[0].lastName)

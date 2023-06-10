@@ -11,6 +11,8 @@ import Home from './components/Home'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Booking from './components/Booking'
 import Report from './components/Report'
+import Flight from './components/Flight'
+import CustomPackages from './components/CustomPackages'
 
 function App() {
   return (
@@ -39,6 +41,12 @@ function App() {
         </Route>
         <Route path='/report/:id'>
           <Report />
+        </Route>
+        <Route path='/flights/:id'>
+          <Flight />
+        </Route>
+        <Route path='/customPackages/:id'>
+          <CustomPackages />
         </Route>
         <Route path='*'>
           <Error />
