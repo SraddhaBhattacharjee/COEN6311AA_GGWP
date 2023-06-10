@@ -5,14 +5,13 @@ import { AiFillEdit } from 'react-icons/ai';
 import { MdDelete } from 'react-icons/md';
 import BookNowPackageEdit from './BookNowPackageEdit';
 
-const TravelBooking = ({ booking, color, setBookings }) => {
+const TravelBooking = ({ booking, color, setBookings, setShowNotification, setMessage, setDescription }) => {
     const [showBookNow, setShowBookNow] = React.useState(false);
-
 
 
     return (
         <>
-            {showBookNow && <BookNowPackageEdit show={showBookNow} onHide={() => setShowBookNow(false)} booking={booking} setBookings={setBookings}/>}
+            {showBookNow && <BookNowPackageEdit show={showBookNow} onHide={() => setShowBookNow(false)} booking={booking} setBookings={setBookings} setShowNotification={setShowNotification} setMessage={setMessage} setDescription={setDescription}/>}
             <Card style={{ width: '20rem', backgroundColor: color }}>
                 <Card.Body>
                     <Card.Title>{booking.travelPackage.name} <span style={{
@@ -28,7 +27,7 @@ const TravelBooking = ({ booking, color, setBookings }) => {
                                     userId: booking.customer.id,
                                     packageId: booking.travelPackage.id,
                                 }
-                                fetch(`https://travel-package-management.herokuapp.com/bookings`, {
+                                fetch(`http://localhost:8080/bookings`, {
                                     method: 'DELETE',
                                     headers: {
                                         'Content-Type': 'application/json'
@@ -36,6 +35,9 @@ const TravelBooking = ({ booking, color, setBookings }) => {
                                     body: JSON.stringify(data)
                                 }).then(() => {
                                     setBookings(prev => prev.filter(b => b.id !== booking.id))
+                                    setShowNotification(true)
+                                    setMessage("Package deleted Successfully");
+                                    setDescription("Your Package has been deleted successfully. ")
                                 })
 
                             }}
@@ -45,6 +47,7 @@ const TravelBooking = ({ booking, color, setBookings }) => {
                 <ListGroup className="list-group-flush" >
                     <ListGroup.Item style={{ backgroundColor: color }}>Departure Date: {booking.departureDate.split("T")[0]}</ListGroup.Item>
                     <ListGroup.Item style={{ backgroundColor: color }}>Booked To: {booking.customer.firstName} {booking.customer.lastName}</ListGroup.Item>
+                    {booking.travelPackage.flight && <ListGroup.Item style={{ backgroundColor: color }}>Flight: {booking.travelPackage.flight.name}</ListGroup.Item>}
                 </ListGroup>
 
             </Card>

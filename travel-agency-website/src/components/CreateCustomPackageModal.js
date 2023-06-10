@@ -3,14 +3,14 @@ import { Dropdown, Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-function CreateTravelPackage(props) {
+function CreateCustomPackageModal(props) {
     const [packageName, setPackageName] = React.useState(props.travel ? props.travel.name : '');
     const [hotel, setHotel] = React.useState(props.travel ? props.travel.hotelName : '');
     const [days, setDays] = React.useState(props.travel ? props.travel.numberOfDays : '');
     const [nights, setNights] = React.useState(props.travel ? props.travel.numberOfNights : '');
     const [city, setCity] = React.useState(props.travel ? props.travel.destinationCity : '');
     const [country, setCountry] = React.useState(props.travel ? props.travel.destinationCountry : '');
-    const [price, setPrice] = React.useState(props.travel ? props.travel.price : '');
+    const [price, setPrice] = React.useState(props.travel ? props.travel.price : '100');
     const [flights, setFlights] = React.useState([]);
     const [selectedValue, setSelectedValue] = React.useState(props.travel && props.travel.flight ? props.travel.flight.name : "");
     const [flightId, setFlightId] = React.useState('');
@@ -18,14 +18,15 @@ function CreateTravelPackage(props) {
     React.useEffect(() => {
         fetch('http://localhost:8080/flights')
             .then(res => res.json())
-            .then(data => {setFlights(data);
+            .then(data => {
+                setFlights(data);
                 setSelectedValue(data.length > 0 ? data[0].name : "Select Flight")
             })
             .catch(err => console.log(err))
     }, [])
 
 
-    function FlightDropDown({ flights, selectedValue, setSelectedValue}) {
+    function FlightDropDown({ flights, selectedValue, setSelectedValue }) {
 
 
         const handleDropdownChange = (eventKey, event) => {
@@ -33,9 +34,10 @@ function CreateTravelPackage(props) {
             const flight = flights.find(flight => flight.name === eventKey);
             if (flight && flight.id) {
                 setFlightId(flight.id);
+                setPrice(parseInt(flight.cost) + parseInt(price))
             }
         };
-    
+
         return (
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Dropdown onSelect={handleDropdownChange} className='m-2 '>
@@ -61,13 +63,15 @@ function CreateTravelPackage(props) {
             },
             body: JSON.stringify({
                 name: packageName,
-                hotelName:  hotel,
+                hotelName: hotel,
                 numberOfDays: days,
                 numberOfNights: nights,
                 destinationCity: city,
                 destinationCountry: country,
                 price,
-                id: props.travel.id
+                id: props.travel.id,
+                flightId,
+                userId: props.user.id
             })
         })
             .then(res => res.json())
@@ -91,13 +95,14 @@ function CreateTravelPackage(props) {
             },
             body: JSON.stringify({
                 name: packageName,
-                hotelName:  hotel,
+                hotelName: hotel,
                 numberOfDays: days,
                 numberOfNights: nights,
                 destinationCity: city,
                 destinationCountry: country,
                 price,
-                flightId
+                flightId,
+                userId: props.user.id
             })
         })
             .then(res => res.json())
@@ -114,77 +119,77 @@ function CreateTravelPackage(props) {
 
     return (
         <>
-        <Modal
-            {...props}
-            size="md"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-        >
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-                {props.isUpdate ? "Update Travel Package": "Create New Travel Package"}
+            <Modal
+                {...props}
+                size="md"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Create Your own Custom Package
 
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Form>
-                    <Form.Group controlId="formBasicEmail" className='m-2'>
-                        <Form.Control type="text" placeholder={packageName ? packageName :"Enter package"} onChange={(e) => setPackageName(e.target.value)} 
-                        value={packageName}
-                        />
-                    </Form.Group>
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group controlId="formBasicEmail" className='m-2'>
+                            <Form.Control type="text" placeholder={packageName ? packageName : "Enter package"} onChange={(e) => setPackageName(e.target.value)}
+                                value={packageName}
+                            />
+                        </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail" className='m-2'>
-                        <Form.Control type="text" placeholder={hotel ? hotel : "Enter Hotel"}
-                        onChange={(e) => setHotel(e.target.value)} value={hotel} />
-                    </Form.Group>
+                        <Form.Group controlId="formBasicEmail" className='m-2'>
+                            <Form.Control type="text" placeholder={hotel ? hotel : "Enter Hotel"}
+                                onChange={(e) => setHotel(e.target.value)} value={hotel} />
+                        </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail" className='m-2'>
-                        <Form.Control type="number" placeholder={days ? days : "Enter number of days"}
-                         onChange={(e) => setDays(e.target.value)} value={days} min="0"/>
-                    </Form.Group>
+                        <Form.Group controlId="formBasicEmail" className='m-2'>
+                            <Form.Control type="number" placeholder={days ? days : "Enter number of days"}
+                                onChange={(e) => setDays(e.target.value)} value={days} min="0" />
+                        </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail" className='m-2'>
-                        <Form.Control type="number" placeholder={
-                            nights ? nights : "Enter number of nights"
-                        } onChange={(e) => setNights(e.target.value)} value={nights} min="0"/>
-                    </Form.Group>
+                        <Form.Group controlId="formBasicEmail" className='m-2'>
+                            <Form.Control type="number" placeholder={
+                                nights ? nights : "Enter number of nights"
+                            } onChange={(e) => setNights(e.target.value)} value={nights} min="0" />
+                        </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail" className='m-2'>
-                        <Form.Control type="text" placeholder={
-                            city ? city : "Enter city"
-                        } onChange={(e) => setCity(e.target.value)} value={city} />
-                    </Form.Group>
+                        <Form.Group controlId="formBasicEmail" className='m-2'>
+                            <Form.Control type="text" placeholder={
+                                city ? city : "Enter city"
+                            } onChange={(e) => setCity(e.target.value)} value={city} />
+                        </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail" className='m-2'>
-                        <Form.Control type="text" placeholder={
-                            country ? country : "Enter country"
-                        } onChange={(e) => setCountry(e.target.value)} value={country} />
-                    </Form.Group>
+                        <Form.Group controlId="formBasicEmail" className='m-2'>
+                            <Form.Control type="text" placeholder={
+                                country ? country : "Enter country"
+                            } onChange={(e) => setCountry(e.target.value)} value={country} />
+                        </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail" className='m-2'>
-                        <Form.Control type="number" placeholder={
-                            price ? price : "Enter price"
-                        } onChange={(e) => setPrice(e.target.value)} value={price} min="0"/>
-                    </Form.Group>
-                    <FlightDropDown flights={flights} selectedValue={selectedValue} setSelectedValue={setSelectedValue} />
+                        <Form.Group controlId="formBasicEmail" className='m-2'>
+                            <Form.Control type="number" placeholder={
+                                price ? price : "Total price"
+                            } value={price} min="0" disabled={true} />
+                        </Form.Group>
+                        <FlightDropDown flights={flights} selectedValue={selectedValue} setSelectedValue={setSelectedValue} />
 
 
 
-                </Form>
-            </Modal.Body>
-            <Modal.Footer>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
 
-                <Button variant="secondary" onClick={props.onhide}>
-                    Close
-                </Button>
-                <Button variant="primary" onClick={props.isUpdate? handleUpdate: handleSubmit}>
-                   {props.isUpdate ? "Update Changes": "Save Changes"}
-                </Button>
-            </Modal.Footer>
-        </Modal>
+                    <Button variant="secondary" onClick={props.onhide}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={props.isUpdate ? handleUpdate : handleSubmit}>
+                        {props.isUpdate ? "Update Changes" : "Save Changes"}
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     );
 }
 
-export default CreateTravelPackage;
+export default CreateCustomPackageModal;

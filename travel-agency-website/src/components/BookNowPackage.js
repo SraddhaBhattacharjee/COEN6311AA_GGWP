@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Dropdown from 'react-bootstrap/Dropdown';
 
-function UserDropDown({ users, selectedValue, setSelectedValue }) {
+function UserDropDown({ users, selectedValue, setSelectedValue}) {
 
 
 
@@ -37,10 +37,10 @@ function BookNowPackage(props) {
     const handleSave = () => {
         const data = {
             departureDate: destinationDate,
-            userId : users.find(user => user.firstName + " " + user.lastName === selectedValue).id,
-            packageId : props.travel.id
+            userId: users.find(user => user.firstName + " " + user.lastName === selectedValue).id,
+            packageId: props.travel.id
         }
-        fetch('https://travel-package-management.herokuapp.com/bookings', {
+        fetch('http://localhost:8080/bookings', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -50,13 +50,16 @@ function BookNowPackage(props) {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
+              props.setShowNotification(true)
+              props.setMessage("Package Booked Successfully");
+              props.setDescription("Enjoy! Your Package has been booked successfully. ")
             })
     }
 
 
 
     useEffect(() => {
-        fetch('https://travel-package-management.herokuapp.com/users')
+        fetch('http://localhost:8080/users')
             .then(res => res.json())
             .then(data => setUsers(data), () => {
                 setSelectedValue(users[0].firstName + " " + users[0].lastName)
@@ -66,47 +69,47 @@ function BookNowPackage(props) {
 
 
     return (
-        <Modal
-            {...props}
-            size="md"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-        >
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-                    Book {packageName} Package
+        <>
+            <Modal
+                {...props}
+                size="md"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Book {packageName} Package
 
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Form>
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
 
-                    <UserDropDown users={users} selectedValue={selectedValue} setSelectedValue={setSelectedValue} />
+                        {props.user && props.user.type === "AGENT" && <UserDropDown users={users} selectedValue={selectedValue} setSelectedValue={setSelectedValue} />}
+                        <Form.Group controlId="formBasicEmail" className='m-2'>
+                            <Form.Control type="date" placeholder={destinationDate ? destinationDate : "Enter number Departure Date"} onChange={(e) => setDestinationDate(e.target.value)} value={destinationDate} />
 
-                    <Form.Group controlId="formBasicEmail" className='m-2'>
-                        <Form.Control type="date" placeholder={destinationDate ? destinationDate : "Enter number Departure Date"} onChange={(e) => setDestinationDate(e.target.value)} value={destinationDate} />
-
-                    </Form.Group>
-
+                        </Form.Group>
 
 
-                </Form>
-            </Modal.Body>
-            <Modal.Footer>
 
-                <Button variant="secondary" onClick={() => {
-                    props.onHide();
-                }}>
-                    Close
-                </Button>
-                <Button variant="primary" onClick={() => {
-                    props.onHide();
-                    handleSave();
-                }}>
-                    Save
-                </Button>
-            </Modal.Footer>
-        </Modal>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+
+                    <Button variant="secondary" onClick={() => {
+                        props.onHide();
+                    }}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={() => {
+                        props.onHide();
+                        handleSave();
+                    }}>
+                        Save
+                    </Button>
+                </Modal.Footer>
+            </Modal></>
     );
 }
 

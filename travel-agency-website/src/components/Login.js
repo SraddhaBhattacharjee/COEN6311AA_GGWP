@@ -8,7 +8,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    fetch('https://travel-package-management.herokuapp.com/users/login', {
+    fetch('http://localhost:8080/users/login', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'

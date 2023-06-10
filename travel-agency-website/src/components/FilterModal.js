@@ -13,7 +13,7 @@ function FilterModal(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('https://travel-package-management.herokuapp.com/packages/filter', {
+        fetch('http://localhost:8080/packages/filter', {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -30,6 +30,9 @@ function FilterModal(props) {
             .then(data => {
                 props.handleFilterPackage(data);
                 props.onHide();
+                props.setShowNotification(true);
+                props.setMessage('Filter Applied');
+                props.setDescription('Filter Applied Successfully');
             })
             .catch(err => console.log(err))
     }
