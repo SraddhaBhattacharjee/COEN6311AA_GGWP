@@ -45,26 +45,26 @@ Dinesh Kini Bailoor(40231799)
 
 | User Story                                                                                                        | Task                                                                       | Estimate | Priority | Status  |
 |-------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|----------|----------|---------|
-| As an agent, I want to create and manage agent accounts, ensuring authorized access to the system.                | - Design and implement agent account creation functionality                  | 4 days   | High     | Planned |
-|                                                                                                                   | - Develop agent account management system                                   | 5 days   | High     | Planned |
-| As an agent, I want to view reports on bookings and revenue, allowing me to monitor business performance.        | - Design reporting system for bookings and revenue                           | 4 days   | High     | Planned |
-|                                                                                                                   | - Implement reporting functionality for bookings and revenue                 | 3 days   | High     | Planned |
-| As an agent, I want to receive notifications about new bookings, cancellations, or other relevant updates.      | - Set up notification system for new bookings and updates                    | 3 days   | Medium   | Planned |
-|                                                                                                                   | - Develop notification handling and delivery mechanism                      | 4 days   | Medium   | Planned |
-| As an agent, I want to manage customer accounts, including updating personal information or handling account-related requests. | - Design customer account management interface                   | 5 days   | High     | Planned |
-|                                                                                                                   | - Implement functionality for updating customer information and requests    | 4 days   | High     | Planned |
+| As an agent, I want to create and manage agent accounts, ensuring authorized access to the system.                | - Design and implement agent account creation functionality                  | 4 days   | High     | Completed      |
+|                                                                                                                   | - Develop agent account management system                                   | 5 days   | High     | Completed      |
+| As an agent, I want to view reports on bookings and revenue, allowing me to monitor business performance.        | - Design reporting system for bookings and revenue                           | 4 days   | High     | Completed      |
+|                                                                                                                   | - Implement reporting functionality for bookings and revenue                 | 3 days   | High     | Completed      |
+| As an agent, I want to receive notifications about new bookings, cancellations, or other relevant updates.      | - Set up notification system for new bookings and updates                    | 3 days   | Medium   | Completed      |
+|                                                                                                                   | - Develop notification handling and delivery mechanism                      | 4 days   | Medium   | Completed      |
+| As an agent, I want to manage customer accounts, including updating personal information or handling account-related requests. | - Design customer account management interface                   | 5 days   | High     | Completed      |
+|                                                                                                                   | - Implement functionality for updating customer information and requests    | 4 days   | High     | Completed      |
 
 
 #### Epic 4: Custom Package Creation
 
 | User Story                                                                                                        | Task                                                                       | Estimate | Priority | Status  |
 |-------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|----------|----------|---------|
-| As a customer, I want to create a custom travel package by selecting individual components (flights, hotels, activities), allowing for personalized experiences. | - Design and implement selection interface for flights, hotels, and activities | 6 days   | High     | Planned |
-|                                                                                                                   | - Develop functionality to store selected components for a custom package    | 5 days   | High     | Planned |
-| As a customer, I want to view the total cost of my custom package, including the prices of selected components and any additional fees. | - Calculate and display the total cost of the custom package                | 3 days   | Medium   | Planned |
+| As a customer, I want to create a custom travel package by selecting individual components (flights, hotels, activities), allowing for personalized experiences. | - Design and implement selection interface for flights, hotels, and activities | 6 days   | High     | Completed      |
+|                                                                                                                   | - Develop functionality to store selected components for a custom package    | 5 days   | High     | Completed      |
+| As a customer, I want to view the total cost of my custom package, including the prices of selected components and any additional fees. | - Calculate and display the total cost of the custom package                | 3 days   | Medium   | Completed      |
 |                                                                                                                   | - Include any additional fees in the calculation of the total cost          | 2 days   | Medium   | Planned |
-| As an agent, I want to store and manage custom packages created by customers, ensuring their availability for booking. | - Design database structure for storing custom packages                      | 4 days   | High     | Planned |
-|                                                                                                                   | - Implement functionality to add, update, and delete custom packages         | 5 days   | High     | Planned |
+| As an agent, I want to store and manage custom packages created by customers, ensuring their availability for booking. | - Design database structure for storing custom packages                      | 4 days   | High     | Completed      |
+|                                                                                                                   | - Implement functionality to add, update, and delete custom packages         | 5 days   | High     | Completed      |
 
 
 #### Epic 5: Payment Processing
