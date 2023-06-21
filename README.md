@@ -7,8 +7,8 @@ Dinesh Kini Bailoor(40231799)
 <br> Sultan Singh(40235080)
 
 ## Website: https://travel-package-management.herokuapp.com/
-### Agent Login: aliceagent@gmail.com/ alice123
-### Customer Login: customer@gmail.com/ customer123
+### Agent Login: aliceagent@gmail.com/ aa
+### Customer Login: customer@gmail.com/ aa
 
 ## Scan QR code
 ![](qr-code.png)
