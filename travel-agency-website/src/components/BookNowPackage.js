@@ -3,8 +3,9 @@ import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Dropdown from 'react-bootstrap/Dropdown';
+import Stripe from "react-stripe-checkout";
 
-function UserDropDown({ users, selectedValue, setSelectedValue}) {
+function UserDropDown({ users, selectedValue, setSelectedValue }) {
 
 
 
@@ -50,10 +51,41 @@ function BookNowPackage(props) {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-              props.setShowNotification(true)
-              props.setMessage("Package Booked Successfully");
-              props.setDescription("Enjoy! Your Package has been booked successfully. ")
+                props.setShowNotification(true)
+                props.setMessage("Package Booked Successfully");
+                props.setDescription("Enjoy! Your Package has been booked successfully. ")
             })
+    }
+
+    async function handleToken(token) {
+        const data = {
+            departureDate: destinationDate,
+            userId: users.find(user => user.firstName + " " + user.lastName === selectedValue).id,
+            packageId: props.travel.id
+        }
+
+        fetch(`http://localhost:8080/bookings/charge`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                token: token.id,
+                amount: +props.travel.price,
+            },
+            body: JSON.stringify(data),
+        }
+
+        )
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                props.setShowNotification(true)
+                props.onHide();
+                props.setMessage("Package Booked Successfully");
+                props.setDescription("Enjoy! Your Package has been booked successfully. ")
+
+            })
+            .catch(err => console.log(err))
+
     }
 
 
@@ -102,12 +134,11 @@ function BookNowPackage(props) {
                     }}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={() => {
-                        props.onHide();
-                        handleSave();
-                    }}>
-                        Save
-                    </Button>
+                    <Stripe
+                        stripeKey="pk_test_51NDAmHCpcQMR8x5qndw3aa6AYJTB1StlEMfYpZmyP1RJgOrHmnr5cMIdDZtkhgFbypSH9B0TQSWZgxopDLHwWNZ900O0cTIEWk"
+                        token={handleToken}
+
+                    />
                 </Modal.Footer>
             </Modal></>
     );
